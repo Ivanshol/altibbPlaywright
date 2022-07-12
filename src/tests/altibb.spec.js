@@ -11,15 +11,15 @@ test('Altibb', async ({ page }) => {
   await base.gotoSite();
   await base.gotoMedicalVideosPage();
   await medical.clickAVideoHeader();
-  await expect(medical.clickAnAppointmentButtonAndVerifyPage()).toHaveText('ابحث عن طبيب واحجز موعد بكل سهولة');
+  await expect(await medical.clickAnAppointmentButtonAndVerifyPage()).toHaveText('ابحث عن طبيب واحجز موعد بكل سهولة');
   await base.goToPreviousPage();
-  await expect(medical.assertFreeSuggestionsIsDisplayed()).toHaveText('اسئلة-طبية');
+  await expect(await medical.assertFreeSuggestionsIsDisplayed()).toHaveText('اسئلة-طبية');
   await base.goToPreviousPage();
-  await expect(medical.assertMedicalNewsSectionIsDisplayed()).toBeVisible();
-  await expect(medical.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
+  await expect(await medical.assertMedicalNewsSectionIsDisplayed()).toBeVisible();
+  await expect(await medical.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
 });
 
-test.skip(' Verify all share links works', async ({ page }) => {
+test(' Verify all share links works', async ({ page }) => {
   const medical = new MedicalVideos(page);
   await medical.visit();
   for (let i = 0; i < arrMedias.length; i++) {
