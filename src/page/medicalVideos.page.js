@@ -11,8 +11,8 @@ exports.MedicalVideos = class MedicalVideos {
   constructor(page) {
     this.page = page;
     this.videoHeader = page.locator('article div a h2 >> nth=1');
-    this.socalMediaMenuButton = await page.$$('#social')[0];
-    this.suggestionsLabel = await page.$$('header font font')[0];
+    //this.socalMediaMenuButton = await page.$$('#social')[0];
+    //this.suggestionsLabel = await page.$$('header font font')[0];
     this.socalMediaShareButton = page.locator('article div a');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.freeSuggestionsButton = page.locator('section div a font font');
@@ -31,13 +31,18 @@ exports.MedicalVideos = class MedicalVideos {
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
+
     await this.page.locator('[class="ask-doctor-new-button "]').click();
     return this.appointmentLabel;
   }
 
   async assertFreeSuggestionsIsDisplayed() {
-    await this.suggestionsLabel.click();
-    await this.page.locator('section div a font font >> nth=3').click();
+    await this.page.waitForSelector('header font font')
+    const suggestionsLabel = await this.page.$$('header font font')[0];
+    await suggestionsLabel.click();
+    await this.page.waitForSelector('section div a font font')
+    const suggestionsButton = await this.page.$$('section div a font font')[3];
+    await suggestionsButton.click();
     return this.page.url();
   }
 
