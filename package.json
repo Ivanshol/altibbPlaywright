@@ -1,0 +1,17 @@
+{
+  "name": "altibbplaywright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.23.2",
+    "allure-playwright": "^2.0.0-beta.18"
+  },
+  "dependencies": {
+    "playwright": "^1.23.1"
+  }
+}
