@@ -12,6 +12,7 @@ exports.MedicalVideos = class MedicalVideos {
     this.page = page;
     this.videoHeader = page.locator('article div a h2 >> nth=1');
     this.socalMediaMenuButton = page.locator('#social >> nth=0');
+    this.suggestionsLabel = page.locator('header font font >> nth=0');
     this.socalMediaShareButton = page.locator('article div a');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.freeSuggestionsButton = page.locator('section div a font font');
@@ -35,7 +36,7 @@ exports.MedicalVideos = class MedicalVideos {
   }
 
   async assertFreeSuggestionsIsDisplayed() {
-    await this.page.locator('header font font >> nth=0').click();
+    await this.suggestionsLabel.click();
     await this.page.locator('section div a font font >> nth=3').click();
     return this.page.url();
   }

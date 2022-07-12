@@ -26,9 +26,9 @@ test(' Verify all share links works', async ({ page }) => {
       await medical.socalMediaMenuButton.click();
       let [newPage] = await Promise.all([
           page.context().waitForEvent("page"),
-          page.click(`.video-container a[href*="${arrMedias[i]}"]`)
+          page.click('[class="social-network-v2"]')
       ])
-      await newPage.waitForLoadState()
+      await newPage.waitForLoadState();
       expect(newPage.url()).toContain(arrMedias[i]);
       await medical.visit();
   }
