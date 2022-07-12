@@ -24,4 +24,4 @@ jobs:
           allure_history: allure-history
 
       - name: Install dependencies and run tests
-        run: npm install && npm test
+        run: npm install && npx playwright test tests/altibb.spec.js
