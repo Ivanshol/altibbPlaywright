@@ -11,8 +11,8 @@ exports.MedicalVideos = class MedicalVideos {
   constructor(page) {
     this.page = page;
     this.videoHeader = page.locator('article div a h2 >> nth=1');
-    this.socalMediaMenuButton = page.locator('#social >> nth=0');
-    this.suggestionsLabel = page.waitForSelector('header font font >> nth=0');
+    this.socalMediaMenuButton = await page.$$('#social')[0];
+    this.suggestionsLabel = await page.$$('header font font')[0];
     this.socalMediaShareButton = page.locator('article div a');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.freeSuggestionsButton = page.locator('section div a font font');
