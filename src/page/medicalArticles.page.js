@@ -9,7 +9,7 @@ exports.MedicalArticles = class MedicalArticles {
   constructor(page) {
     this.page = page;
     this.allQuestionsButton = page.locator('.show-all-questions-button');
-    this.socalMediaMenuButton = page.locator('#social >> nth=0');
+    this.socalMediaMenuButton = page.locator('#social').first();
   }
 
   async clickAnArticleHeader() {
@@ -18,33 +18,28 @@ exports.MedicalArticles = class MedicalArticles {
 
   async visit(){
     await this.page.goto('https://automation.altibb.com/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA-%D8%B7%D8%A8%D9%8A%D8%A9/%D8%A7%D9%85%D8%B1%D8%A7%D8%B6-%D8%A7%D9%84%D8%AC%D9%87%D8%A7%D8%B2-%D8%A7%D9%84%D9%87%D8%B6%D9%85%D9%8A/asdsadsadsadasd-5995');
-    }
+    await this.page.waitForLoadState(); 
+  }
 
   async clickAFirstArticleHeader() {
-    await this.page.locator('body div a h2 >> nth=1').click();
+    await this.page.locator('.article-title').first().click();
   }
 
   async assertFreeSuggestionsTitle() {
     return this.page.locator('header.title-container').innerText();
   }
 
-  async assertQuestionsAreDisplayed(index) {
-    let arrElements = await this.page.$$('article.question-box');
-    return await arrElements[index].toBeVisible();
+  async assertQuestionsSectionIsDisplayed(index) {
+    return  this.page.locator('.free-question-container');
   }
 
   async assertAllQuestionsPage() {
     await this.allQuestionsButton.click();
-    return this.page.locator('body h1 >> nth=0');
+    return this.page.locator('body h1').first();
   }
 
-  async goToLatestVideos(){
-    await this.page.locator('body div h3 >> nth=1').click();
-  }
-
-  async assertLatestVideosAreDisplayed(index) {
-    let arrElements = await this.page.$$('article.video-box');
-    return expect(arrElements[index].toBeVisible);
+  async assertLatestVideosAreDisplayed() {
+    return this.page.locator('#video-container-inner');
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
@@ -53,9 +48,4 @@ exports.MedicalArticles = class MedicalArticles {
     await this.page.goBack();
   }
   
-  async assertLatestMedicalVideoIsDisplayed() {
-    await this.page.locator('div h3 font font >> nth=2').scrollIntoViewIfNeeded();
-    await this.page.locator('div h3 font font >> nth=2').click();
-    await expect(this.page.locator('div h3 font font >> nth=2')).toBeVisible;
-  }
 }

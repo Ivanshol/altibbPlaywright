@@ -27,13 +27,4 @@ exports.MedicalNews = class MedicalNews {
     return this.page.locator('.ask-question-title').innerText();
   }
 
-  async clickAnAppointmentButtonAndVerifyPage() {
-    await this.page.locator('.ask-doctor-new-button').click();
-    return this.appointmentLabel;
-  }
-
-  async assertLatestMedicalVideoIsDisplayed() {
-    return this.page.locator('.primary');
-  }
-
 }

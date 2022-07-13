@@ -18,19 +18,14 @@ exports.MedicalVideos = class MedicalVideos {
   
   async visit(){
   await this.page.goto('https://automation.altibb.com/%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D8%B7%D8%A8%D9%8A%D8%A9/%D8%A7%D9%84%D8%A7%D9%85%D8%B1%D8%A7%D8%B6-%D8%A7%D9%84%D9%85%D8%B9%D8%AF%D9%8A%D8%A9/%D8%A7%D9%84%D8%B1%D8%AC%D9%81%D8%A7%D9%86-%D8%A7%D9%84%D8%A7%D8%B0%D9%8A%D9%86%D9%8A-%D8%A7%D9%84%D9%82%D9%84%D8%A8-560')
-  }
+  await this.page.waitForLoadState();  
+}
 
   async goToPreviousPage(){
     await this.page.goBack();
   }
 
-  async clickAnAppointmentButtonAndVerifyPage() {
-    await this.page.locator('.ask-doctor-new-button').click();
-    await this.page.waitForLoadState('networkidle');
-    return this.page.locator('.main-search-header').innerText();
-  }
-
-  async assertFreeSuggestionsIsDisplayed() {
+  async assertFreeSuggestionsLabel() {
     await this.page.locator('.show-all-questions-button').click();
     return this.page.locator('h1.page-title').innerText();
   }

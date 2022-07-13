@@ -5,34 +5,34 @@ const { MedicalArticles } = require('../page/medicalArticles.page.js');
 const { MedicalNews } = require('../page/medicalNews.page.js');
 const arrMedias = [ 'facebook', 'linkedin', 'twitter', 'instagram'];
 
-test('Altibb', async ({ page }) => {
+test('Altibb check buttons on a news article page', async ({ page }) => {
   const base = new Base(page);
-  const news = new MedicalNews(page);
+  const medicalNews = new MedicalNews(page);
 
   await base.gotoSite();
   await base.gotoMedicalNewsPage();
-  await news.clickANewsHeader();
-  await expect(await news.clickTalkToDoctorButtonAndVerifyPage()).toContain('اطرح سؤالك الآن ليصل إلى آلاف الأطبا');;
+  await medicalNews.clickANewsHeader();
+  await expect(await medicalNews.clickTalkToDoctorButtonAndVerifyPage()).toContain('اطرح سؤالك الآن ليصل إلى آلاف الأطبا');
   await base.goToPreviousPage();
-  await expect(await news.clickAnAppointmentButtonAndVerifyPage()).toHaveText('ابحث عن طبيب واحجز موعد بكل سهولة');;
+  await expect(await base.clickAnAppointmentButtonAndVerifyPage()).toContain('ابحث عن طبيب واحجز موعد بكل سهولة');
   await base.goToPreviousPage();
-  await expect(await news.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
+  await expect(await base.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
 });
 
-test(' Verify all share links works', async ({ page }) => {
+test(' Verify all share links work', async ({ page }) => {
   const base = new Base(page);
-  const article = new MedicalArticles(page);
+  const medicalArticle = new MedicalArticles(page);
   await base.gotoSite();
   await base.gotoMedicalArticlesPage();
-  await article.clickAFirstArticleHeader();
+  await medicalArticle.clickAFirstArticleHeader();
   for (let i = 0; i < arrMedias.length; i++) {
-      await article.socalMediaMenuButton.click();
+      await base.socalMediaMenuButton.click();
       let [newPage] = await Promise.all([
           page.context().waitForEvent("page"),
           page.click(`.article-container a[href*="${arrMedias[i]}"]`)
       ])
       await newPage.waitForLoadState()
       expect(newPage.url()).toContain(arrMedias[i]);
-      await article.visit();
+      await medicalArticle.visit();
   }
 });
