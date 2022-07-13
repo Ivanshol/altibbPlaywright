@@ -9,16 +9,18 @@ exports.Base = class Base {
     this.page = page;
     this.dropDownMenu = page.locator('[href="#"][data-toggle="dropdown"] >> nth=1');
     this.medVideosTab = page.locator('[href="/فيديوهات-طبية"] >> nth=1');
-    this.medNewsTab = page.locator('[[href="/اخبار-طبية"] >> nth=1');
+    this.medNewsTab = page.locator('[href="/اخبار-طبية"] >> nth=1');
     this.medArticlesTab = page.locator('[href="/مقالات-طبية"] >> nth=1');
   }
 
   async goToPreviousPage(){
     await this.page.goBack();
+    await this.page.waitForLoadState();
   }
 
   async gotoSite() {
     await this.page.goto('https://automation.altibb.com/');
+    await this.page.waitForLoadState('networkidle');
   }
 
   async gotoMedicalVideosPage() {

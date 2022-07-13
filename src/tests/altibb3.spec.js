@@ -12,7 +12,7 @@ test('Altibb', async ({ page }) => {
   await base.gotoSite();
   await base.gotoMedicalNewsPage();
   await news.clickANewsHeader();
-  await expect(await news.clickTalkToDoctorButtonAndVerifyPage()).toHaveText('اطرح سؤالك الآن ليصل إلى آلاف الأطبا');;
+  await expect(await news.clickTalkToDoctorButtonAndVerifyPage()).toContain('اطرح سؤالك الآن ليصل إلى آلاف الأطبا');;
   await base.goToPreviousPage();
   await expect(await news.clickAnAppointmentButtonAndVerifyPage()).toHaveText('ابحث عن طبيب واحجز موعد بكل سهولة');;
   await base.goToPreviousPage();
@@ -22,17 +22,17 @@ test('Altibb', async ({ page }) => {
 test(' Verify all share links works', async ({ page }) => {
   const base = new Base(page);
   const article = new MedicalArticles(page);
+  await base.gotoSite();
   await base.gotoMedicalArticlesPage();
   await article.clickAFirstArticleHeader();
   for (let i = 0; i < arrMedias.length; i++) {
       await article.socalMediaMenuButton.click();
       let [newPage] = await Promise.all([
           page.context().waitForEvent("page"),
-          page.click('[class="social-network-v2"]')
+          page.click(`.article-container a[href*="${arrMedias[i]}"]`)
       ])
       await newPage.waitForLoadState()
       expect(newPage.url()).toContain(arrMedias[i]);
       await article.visit();
   }
-  //await article.assertLatestMedicalVideoIsDisplayed();
 });

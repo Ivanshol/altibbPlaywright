@@ -13,7 +13,7 @@ exports.MedicalArticles = class MedicalArticles {
   }
 
   async clickAnArticleHeader() {
-    await this.page.locator('body div a h2 >> nth=3').click();
+    await this.page.locator('//h2[text()="Article sarayreh"]').click();
   }
 
   async visit(){
@@ -25,13 +25,12 @@ exports.MedicalArticles = class MedicalArticles {
   }
 
   async assertFreeSuggestionsTitle() {
-    await this.page.locator('body div section header font >> nth=0').click();
-    return this.page.locator('body div section header font nth=0');
+    return this.page.locator('header.title-container').innerText();
   }
 
   async assertQuestionsAreDisplayed(index) {
-    await this.page.locator(`[class="question-owner"] >> nth=${index}`).click();
-    return this.page.locator(`[class="question-owner"] >> ${index}`);
+    let arrElements = await this.page.$$('article.question-box');
+    return await arrElements[index].toBeVisible();
   }
 
   async assertAllQuestionsPage() {
@@ -44,7 +43,8 @@ exports.MedicalArticles = class MedicalArticles {
   }
 
   async assertLatestVideosAreDisplayed(index) {
-    return this.page.locator(`body div h3 >> nth=${index}`);
+    let arrElements = await this.page.$$('article.video-box');
+    return expect(arrElements[index].toBeVisible);
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {

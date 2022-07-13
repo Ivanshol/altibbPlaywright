@@ -1,7 +1,6 @@
 
 const { expect } = require('@playwright/test');
 
-const { chromium } = require('playwright');
 const arrMedias = [ 'facebook', 'linkedin', 'twitter', 'instagram'];
 exports.MedicalVideos = class MedicalVideos {
 
@@ -11,10 +10,9 @@ exports.MedicalVideos = class MedicalVideos {
   constructor(page) {
     this.page = page;
     this.videoHeader = page.locator('article div a h2 >> nth=1');
-    //this.socalMediaMenuButton = await page.$$('#social')[0];
-    //this.suggestionsLabel = await page.$$('header font font')[0];
+    this.socalMediaMenuButton = page.locator('.video-container #social');
     this.socalMediaShareButton = page.locator('article div a');
-    this.appointmentLabel = page.locator('[class="main-search-header"]');
+    this.appointmentLabel = page.locator('//h1/font/font');
     this.freeSuggestionsButton = page.locator('section div a font font');
   }
 
@@ -31,32 +29,24 @@ exports.MedicalVideos = class MedicalVideos {
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
-
     await this.page.locator('[class="ask-doctor-new-button "]').click();
-    return this.appointmentLabel;
+    await this.page.waitForLoadState('networkidle');
+    return this.page.locator('.main-search-header').innerText();
   }
 
   async assertFreeSuggestionsIsDisplayed() {
-    await this.page.waitForSelector('header font font')
-    const suggestionsLabel = await this.page.$$('header font font')[0];
-    await suggestionsLabel.click();
-    await this.page.waitForSelector('section div a font font')
-    const suggestionsButton = await this.page.$$('section div a font font')[3];
-    await suggestionsButton.click();
-    return this.page.url();
+    await this.page.locator('.show-all-questions-button').click();
+    return this.page.locator('h1.page-title').innerText();
   }
 
   async assertMedicalNewsSectionIsDisplayed() {
-    await this.page.locator('[class="question-background-v2 "] >> nth=1').click();
-    await this.page.locator('div a[class="title"] >> nth=0').click();
-    return this.page.locator('div a[class="title"] >> nth=0');
+    let newsBlock = this.page.locator('[id=suggested-articles-news]');
+    return newsBlock;
   }
 
   async assertLatestMedicalVideoIsDisplayed() {
-    await this.page.locator('div h3 font font >> nth=1').scrollIntoViewIfNeeded();
-    await this.page.locator('div h3 font font >> nth=1').click();
-    await this.page.locator('[class="video-content"]').click();
-    return this.page.locator('[class="video-content"]');
+    let latestVideoBlock = this.page.locator('#video-container-inner .content');
+    return latestVideoBlock;
   }
 
 }

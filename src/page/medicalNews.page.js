@@ -9,11 +9,11 @@ exports.MedicalNews = class MedicalNews {
    */
   constructor(page) {
     this.page = page;
-    this.newsHeader = page.locator('h2 font font >> nth=1');
+    this.newsHeader = page.locator('.news-article-title >> nth=1');
     this.talkToADoctorButton = page.locator('[href="/اسئلة-طبية/اسأل-الطبي/"]');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.socalMediaShareButton = page.locator('article div a');
-    this.talkToADoctorPageHeader = page.locator('h1 font font');
+    this.talkToADoctorPageHeader = page.locator('.ask-question-title');
     this.dropDownMenu = page.locator('[href="#"][data-toggle="dropdown"] >> nth=1');
     this.medArticlesTab = page.locator('[href="/مقالات-طبية"] >> nth=1');
   }
@@ -28,8 +28,8 @@ exports.MedicalNews = class MedicalNews {
 
 
   async clickTalkToDoctorButtonAndVerifyPage() {
-    await this.page.locator('href="/اسئلة-طبية/اسأل-الطبي/"').click();
-    return this.talkToADoctorPageHeader;
+    await this.page.locator('[href="/اسئلة-طبية/اسأل-الطبي/"]').click();
+    return this.talkToADoctorPageHeader.innerText();
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
@@ -38,9 +38,7 @@ exports.MedicalNews = class MedicalNews {
   }
 
   async assertLatestMedicalVideoIsDisplayed() {
-    await this.page.locator('div h3 font font >> nth=2').scrollIntoViewIfNeeded();
-    await this.page.locator('div h3 font font >> nth=2').click();
-    return this.page.locator('div h3 font font >> nth=2');
+    return this.page.locator('.primary');
   }
 
 }

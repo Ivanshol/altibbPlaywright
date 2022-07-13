@@ -11,9 +11,9 @@ test('Altibb', async ({ page }) => {
   await base.gotoSite();
   await base.gotoMedicalVideosPage();
   await medical.clickAVideoHeader();
-  await expect(await medical.clickAnAppointmentButtonAndVerifyPage()).toHaveText('ابحث عن طبيب واحجز موعد بكل سهولة');
+  await expect(await medical.clickAnAppointmentButtonAndVerifyPage()).toContain('ابحث عن طبيب واحجز موعد بكل سهولة');
   await base.goToPreviousPage();
-  await expect(await medical.assertFreeSuggestionsIsDisplayed()).toHaveText('اسئلة-طبية');
+  await expect(await medical.assertFreeSuggestionsIsDisplayed()).toContain('أسئلة واجابات طبية الامراض المعدية');
   await base.goToPreviousPage();
   await expect(await medical.assertMedicalNewsSectionIsDisplayed()).toBeVisible();
   await expect(await medical.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
