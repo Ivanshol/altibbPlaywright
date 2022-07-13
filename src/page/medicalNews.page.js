@@ -11,9 +11,6 @@ exports.MedicalNews = class MedicalNews {
     this.page = page;
     this.newsHeader = page.locator('.news-article-title >> nth=1');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
-    this.socalMediaShareButton = page.locator('article div a');
-    this.dropDownMenu = page.locator('[href="#"][data-toggle="dropdown"] >> nth=1');
-    this.medArticlesTab = page.locator('[href="/مقالات-طبية"] >> nth=1');
   }
 
   async clickANewsHeader() {

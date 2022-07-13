@@ -10,10 +10,6 @@ exports.MedicalVideos = class MedicalVideos {
   constructor(page) {
     this.page = page;
     this.videoHeader = page.locator('article div a h2 >> nth=1');
-    this.socalMediaMenuButton = page.locator('.video-container #social');
-    this.socalMediaShareButton = page.locator('article div a');
-    this.appointmentLabel = page.locator('//h1/font/font');
-    this.freeSuggestionsButton = page.locator('section div a font font');
   }
 
   async clickAVideoHeader() {

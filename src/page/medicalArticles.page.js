@@ -8,7 +8,7 @@ exports.MedicalArticles = class MedicalArticles {
    */
   constructor(page) {
     this.page = page;
-    this.allQuestionsButton = page.locator('[href="/اسئلة-طبية/امراض-باطنية"]');
+    this.allQuestionsButton = page.locator('.show-all-questions-button');
     this.socalMediaMenuButton = page.locator('#social >> nth=0');
   }
 
