@@ -12,7 +12,6 @@ exports.MedicalNews = class MedicalNews {
     this.newsHeader = page.locator('.news-article-title >> nth=1');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.socalMediaShareButton = page.locator('article div a');
-    this.talkToADoctorPageHeader = page.locator('.ask-question-title');
     this.dropDownMenu = page.locator('[href="#"][data-toggle="dropdown"] >> nth=1');
     this.medArticlesTab = page.locator('[href="/مقالات-طبية"] >> nth=1');
   }
@@ -28,7 +27,7 @@ exports.MedicalNews = class MedicalNews {
 
   async clickTalkToDoctorButtonAndVerifyPage() {
     await this.page.locator('[class="news-article-view-inread-cta"]').click();
-    return this.talkToADoctorPageHeader.innerText();
+    return this.page.locator('.ask-question-title').innerText();
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
