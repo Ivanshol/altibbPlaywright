@@ -10,7 +10,6 @@ exports.MedicalNews = class MedicalNews {
   constructor(page) {
     this.page = page;
     this.newsHeader = page.locator('.news-article-title >> nth=1');
-    this.talkToADoctorButton = page.locator('[href="/اسئلة-طبية/اسأل-الطبي/"]');
     this.appointmentLabel = page.locator('[class="main-search-header"]');
     this.socalMediaShareButton = page.locator('article div a');
     this.talkToADoctorPageHeader = page.locator('.ask-question-title');
@@ -28,12 +27,12 @@ exports.MedicalNews = class MedicalNews {
 
 
   async clickTalkToDoctorButtonAndVerifyPage() {
-    await this.page.locator('[href="/اسئلة-طبية/اسأل-الطبي/"]').click();
+    await this.page.locator('[class="news-article-view-inread-cta"]').click();
     return this.talkToADoctorPageHeader.innerText();
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
-    await this.page.locator('[class="ask-doctor-new-button "]').click();
+    await this.page.locator('.ask-doctor-new-button').click();
     return this.appointmentLabel;
   }
 

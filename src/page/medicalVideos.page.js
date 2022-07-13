@@ -29,7 +29,7 @@ exports.MedicalVideos = class MedicalVideos {
   }
 
   async clickAnAppointmentButtonAndVerifyPage() {
-    await this.page.locator('[class="ask-doctor-new-button "]').click();
+    await this.page.locator('.ask-doctor-new-button').click();
     await this.page.waitForLoadState('networkidle');
     return this.page.locator('.main-search-header').innerText();
   }

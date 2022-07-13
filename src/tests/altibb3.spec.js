@@ -19,7 +19,7 @@ test('Altibb', async ({ page }) => {
   await expect(await news.assertLatestMedicalVideoIsDisplayed()).toBeVisible();
 });
 
-test(' Verify all share links works', async ({ page }) => {
+test.skip(' Verify all share links works', async ({ page }) => {
   const base = new Base(page);
   const article = new MedicalArticles(page);
   await base.gotoSite();
